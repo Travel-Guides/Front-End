@@ -1,0 +1,26 @@
+@import "../../../App.scss";
+
+.sign-up-container {
+  display: flex;
+  justify-content: center;
+  margin: 8% auto;
+  line-height: 1.5;
+  background: #f0eceb;
+  width: 40%;
+  border-radius: 20px;
+
+  .sign-up {
+    text-align: center;
+    margin-top: 1rem;
+  }
+}
+
+.register-button {
+  background-color: #729f98;
+  border-color: #729f98;
+}
+
+.register-button:hover {
+  background-color: #283018;
+  border-color: #283018;
+}
