@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Form, Icon, Input, Button } from "antd";
 
+import "./Login.scss";
+
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
@@ -40,8 +42,8 @@ const Login = props => {
   const passwordError = isFieldTouched("password") && getFieldError("password");
 
   return (
-    <div>
-      <Form layout="inline" onSubmit={handleSubmit}>
+    <div class="g-login-container">
+      <Form className="g-login-form" layout="inline" onSubmit={handleSubmit}>
         <Form.Item
           validateStatus={usernameError ? "error" : ""}
           help={usernameError || ""}

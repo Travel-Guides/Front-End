@@ -15,9 +15,9 @@ function App() {
   return (
     <div className="App">
       LOCAL GUIDES
-      <Dashboard />
-      <G_Form />
-      <Login />
+      <Route exact path="/register" component={G_Form} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/dashboard" component={Dashboard} />
     </div>
   );
 }
