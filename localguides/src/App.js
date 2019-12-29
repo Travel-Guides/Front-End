@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import G_Form from "./components/SignUp/G_Form";
 import Login from "./components/LogIn/Login";
 import Navbar from "./components/Navbar/Navbar";
+import Logo from "./components/Img/Logo";
 
 // ROUTES
 import { Route } from "react-router-dom";
@@ -17,7 +18,8 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Route exact path="/home" component={HomePage} />
+      <Logo />
+      <Route exact path="/" component={HomePage} />
       <Route exact path="/register" component={G_Form} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/dashboard" component={Dashboard} />
