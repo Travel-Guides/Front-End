@@ -1,0 +1,22 @@
+@import "../../App.scss";
+
+.nav-bar {
+  height: 4rem;
+  background: $base-color;
+
+  .link-container {
+    margin-left: 85%;
+    width: 15%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .nav-link {
+      color: $white;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+  }
+}
