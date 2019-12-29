@@ -7,13 +7,16 @@
     "axios": "^0.19.0",
     "material-ui": "^0.20.2",
     "node-sass": "^4.13.0",
+    "now": "^16.7.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0"
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.28.0"
   },
   "scripts": {
     "start": "react-scripts start",

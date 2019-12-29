@@ -1,0 +1,29 @@
+@import "../../App.scss";
+
+.home-page-container {
+  // SEARCH INPUT
+  .search-input {
+    width: 40%;
+    margin: 1rem auto;
+
+    .ant-input {
+      text-align: center;
+      background-color: $secondary-color;
+    }
+
+    .ant-input:hover {
+      border: solid 1px $base-color;
+    }
+
+    .ant-input:focus {
+      border: solid 1px $base-color;
+      -webkit-box-shadow: 0px 0px 3px 1px rgba(14, 124, 123, 0.3);
+      box-shadow: 0px 0px 3px 1px rgba(14, 124, 123, 0.3);
+    }
+
+    .ant-btn-primary {
+      background-color: $base-color;
+      border-color: $base-color;
+    }
+  }
+}

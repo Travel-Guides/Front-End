@@ -17,7 +17,7 @@ const Navbar = props => {
           Register
         </Link>
         <Link className="nav-link" to="/login">
-          Login
+          Log In
         </Link>
       </div>
     </div>
