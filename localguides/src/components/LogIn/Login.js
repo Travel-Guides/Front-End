@@ -9,7 +9,7 @@ function hasErrors(fieldsError) {
 }
 
 const Login = props => {
-  const [user, setUser] = useState({ username: "", password: "" });
+  const [user, setUser] = useState({ email: "", password: "" });
 
   // useEffect(() => {
   //   if (token) {
@@ -24,9 +24,9 @@ const Login = props => {
   const handleSubmit = e => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
-      if (user.username && user.password) {
+      if (user.email && user.password) {
         console.log("Received values of form: ", values);
-        setUser({ username: "", password: "" });
+        setUser({ email: "", password: "" });
       }
     });
   };
@@ -95,7 +95,4 @@ const WrappedHorizontalLoginForm = Form.create({ name: "horizontal_login" })(
   Login
 );
 
-export default connect(
-  mapStateToProps,
-  {}
-)(WrappedHorizontalLoginForm);
+export default connect(mapStateToProps, {})(WrappedHorizontalLoginForm);

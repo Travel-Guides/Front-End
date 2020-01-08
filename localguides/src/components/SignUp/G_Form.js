@@ -43,41 +43,30 @@ const G_Form = props => {
     }
   };
   return (
-    <div>
+    <div className="sign-up-container">
       <Form {...formItemLayout} onSubmit={handleSubmit}>
         <h2 className="sign-up">Sign Up</h2>
 
-        <Form.Item label="Full name">
-          {getFieldDecorator("fullName", {
+        <Form.Item label="First Name">
+          {getFieldDecorator("firstName", {
             rules: [
               {
                 required: true,
                 message: "Please enter your full name!"
               }
             ]
-          })(<Input name="fullName" />)}
+          })(<Input name="firstName" />)}
         </Form.Item>
 
-        <Form.Item label="Username">
-          {getFieldDecorator("username", {
+        <Form.Item label="Last Name">
+          {getFieldDecorator("lastName", {
             rules: [
               {
                 required: true,
-                message: "Please input a username!"
+                message: "Please input a lastName!"
               }
             ]
-          })(<Input name="username" />)}
-        </Form.Item>
-
-        <Form.Item label="Password" hasFeedback>
-          {getFieldDecorator("password", {
-            rules: [
-              {
-                required: true,
-                message: "Please input your password!"
-              }
-            ]
-          })(<Input.Password name="password" />)}
+          })(<Input name="lastName" />)}
         </Form.Item>
 
         <Form.Item label="Email">
@@ -91,6 +80,17 @@ const G_Form = props => {
           })(<Input name="email" />)}
         </Form.Item>
 
+        <Form.Item label="Password" hasFeedback>
+          {getFieldDecorator("password", {
+            rules: [
+              {
+                required: true,
+                message: "Please input your password!"
+              }
+            ]
+          })(<Input.Password name="password" />)}
+        </Form.Item>
+
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" className="register-button">
             Register
@@ -102,7 +102,4 @@ const G_Form = props => {
 };
 
 const WrappedRegistrationForm = Form.create({ name: "register" })(G_Form);
-export default connect(
-  null,
-  {}
-)(WrappedRegistrationForm);
+export default connect(null, {})(WrappedRegistrationForm);
