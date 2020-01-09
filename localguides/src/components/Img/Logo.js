@@ -6,7 +6,9 @@ import "./Logo.scss";
 const Logo = () => {
   return (
     <div className="logo-container">
-      <img src={require("./Logo.png")} />
+      <Link to="/">
+        <img src={require("./Logo.png")} />
+      </Link>
     </div>
   );
 };

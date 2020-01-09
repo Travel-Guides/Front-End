@@ -112,7 +112,7 @@ const G_Form = props => {
             rules: [
               {
                 required: true,
-                message: "Please input a lastName!"
+                message: "Please enter your lastName!"
               }
             ]
           })(<Input name="lastName" />)}
@@ -123,7 +123,7 @@ const G_Form = props => {
             rules: [
               {
                 required: true,
-                message: "Please enter your email!"
+                message: "Please enter a valid email address!"
               }
             ]
           })(<Input name="email" />)}
@@ -134,7 +134,7 @@ const G_Form = props => {
             rules: [
               {
                 required: true,
-                message: "Please input your password!"
+                message: "Please enter your password!"
               }
             ]
           })(<Input.Password name="password" />)}
