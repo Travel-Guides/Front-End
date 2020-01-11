@@ -15,40 +15,13 @@
   font-weight: 700;
 }
 
-.ant-form-item-control-wrapper {
-  width: 100%;
-}
-
-.ant-form-item-children input:hover {
-  border: solid 1px $base-color;
-}
-
-.ant-form-item-children input:focus {
-  border: solid 1px $base-color;
-  -webkit-box-shadow: 0px 0px 3px 1px rgba(14, 124, 123, 0.3);
-  box-shadow: 0px 0px 3px 1px rgba(14, 124, 123, 0.3);
-}
-
 #register_password:hover {
   border: solid 1px $base-color;
 }
 
 .register-button {
-  background-color: $base-color;
-  border-color: $base-color;
   width: 100%;
   margin-top: 1rem;
-}
-
-.register-button:hover {
-  background-color: $secondary-color;
-  border-color: $base-color;
-  color: $base-color;
-}
-.ant-btn-primary:focus {
-  color: $base-color;
-  background-color: $secondary-color;
-  border-color: $base-color;
 }
 
 .ant-form-item {
