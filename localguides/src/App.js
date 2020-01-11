@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // COMPONENTS
 import HomePage from "./components/HomePage/HomePage";
 import Dashboard from "./components/Dashboard/Dashboard";
@@ -15,10 +15,35 @@ import PrivateRoute from "./utils/PrivateRoute";
 import "./App.css";
 
 function App() {
+  const [loginPopup, setLoginPopup] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [isLoggedIn]);
+
+  const toggleLogin = e => {
+    if (e) {
+      e.preventDefault();
+    }
+    setLoginPopup(!loginPopup);
+  };
+
   return (
     <div className="App">
-      <Navbar />
+      <Navbar toggleLogin={toggleLogin} />
       <Logo />
+      {loginPopup ? (
+        <Login
+          toggleLogin={toggleLogin}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+      ) : null}
       <Route exact path="/" component={HomePage} />
       <Route exact path="/register" component={G_Form} />
       <Route exact path="/login" component={Login} />

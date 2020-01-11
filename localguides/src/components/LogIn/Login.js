@@ -9,6 +9,7 @@ function hasErrors(fieldsError) {
 }
 
 const Login = props => {
+  console.log(`THIS IS LOGIN PROPS`, props);
   const [user, setUser] = useState({ email: "", password: "" });
 
   // useEffect(() => {
@@ -21,13 +22,23 @@ const Login = props => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   props.form.validateFields((err, values) => {
+  //     if (user.email && user.password) {
+  //       console.log("Received values of form: ", values);
+  //       setUser({ email: "", password: "" });
+  //     }
+  //   });
+  // };
+
+  // Login on form submit
+  const login = e => {
     e.preventDefault();
-    props.form.validateFields((err, values) => {
-      if (user.email && user.password) {
-        console.log("Received values of form: ", values);
-        setUser({ email: "", password: "" });
-      }
+
+    props.form.validateFields(user).then(() => {
+      props.toggleLogin(null);
+      props.setIsLoggedIn(true);
     });
   };
 
@@ -42,50 +53,64 @@ const Login = props => {
   const passwordError = isFieldTouched("password") && getFieldError("password");
 
   return (
-    <div class="g-login-container">
-      <Form className="g-login-form" layout="inline" onSubmit={handleSubmit}>
-        <Form.Item
-          validateStatus={usernameError ? "error" : ""}
-          help={usernameError || ""}
-        >
-          {getFieldDecorator("username", {
-            rules: [{ required: true, message: "Please input your username!" }]
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="Username"
-            />
-          )}
-        </Form.Item>
-        <Form.Item
-          validateStatus={passwordError ? "error" : ""}
-          help={passwordError || ""}
-        >
-          {getFieldDecorator("password", {
-            rules: [{ required: true, message: "Please input your Password!" }]
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="password"
-              placeholder="Password"
-            />
-          )}
-        </Form.Item>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            disabled={hasErrors(getFieldsError())}
+    <div class="login-container">
+      <Form className="login-form" layout="inline" onSubmit={login}>
+        <div className="close-button" onClick={props.toggleLogin}>
+          <Icon className="close-icon" type="close" />
+        </div>
+        <div className="login-form-container">
+          <h2>Log In</h2>
+
+          <Form.Item
+            validateStatus={usernameError ? "error" : ""}
+            help={usernameError || ""}
           >
-            Log in
-          </Button>
-        </Form.Item>
+            {getFieldDecorator("email", {
+              rules: [{ required: true, message: "Please input your email!" }]
+            })(
+              <Input
+                prefix={
+                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                placeholder="email"
+              />
+            )}
+          </Form.Item>
+          <Form.Item
+            validateStatus={passwordError ? "error" : ""}
+            help={passwordError || ""}
+          >
+            {getFieldDecorator("password", {
+              rules: [
+                { required: true, message: "Please input your Password!" }
+              ]
+            })(
+              <Input
+                prefix={
+                  <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                type="password"
+                placeholder="Password"
+              />
+            )}
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={hasErrors(getFieldsError())}
+            >
+              Log In
+            </Button>
+          </Form.Item>
+        </div>
       </Form>
     </div>
   );
 };
 
 const mapStateToProps = state => {
+  console.log(`THIS IS STATE ON LOGIN`, state);
   return {
     token: state.token
   };

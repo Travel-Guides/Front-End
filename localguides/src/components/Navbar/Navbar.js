@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import "./Navbar.scss";
 
 const Navbar = props => {
+  console.log(`THIS IS NAVBAR PROPS`, props);
+
   return (
     <div className="nav-bar">
       <div className="link-container">
@@ -16,7 +18,7 @@ const Navbar = props => {
         <Link className="nav-link" to="/register">
           Register
         </Link>
-        <Link className="nav-link" to="/login">
+        <Link onClick={props.toggleLogin} className="nav-link" to="/login">
           Log In
         </Link>
       </div>
