@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "localguides",
+  "builds": [
+    {
+      "src": "localguides/package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" }
+    }
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "localguides/$1" }]
+}
