@@ -7,6 +7,8 @@ import { Form, Input, Button } from "antd";
 import "./G_Form.scss";
 
 const G_Form = props => {
+  console.log(`SIGNUP PROPS`, props);
+
   const handleSubmit = e => {
     e.preventDefault();
     props.form.validateFieldsAndScroll((err, values) => {
