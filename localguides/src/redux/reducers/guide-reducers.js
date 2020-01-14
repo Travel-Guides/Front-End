@@ -15,26 +15,61 @@ import {
   LOG_OUT
 } from "../actions/index";
 
-// REDUCER
-const initialState = {
-  // GUIDE SIGNUP
-  step: 1,
-  firstName: "",
-  lastName: "",
-  email: "",
-  occupation: "",
-  city: "",
-  bio: "",
-  // --- ///
-  guideData: [],
-  isFetching: false,
-  addingGuide: false,
-  error: ""
-};
-
 export const guideReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SIGNUP_GUIDE_START:
+      return {
+        ...state,
+        error: "",
+        isFetching: true,
+        fetchingMessage: action.payload
+      };
+    case SIGNUP_GUIDE_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        fetchingMessage: "",
+        error: false
+      };
+    case SIGNUP_GUIDE_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isFetching: false
+      };
     default:
       return state;
   }
+};
+
+const initialState = {
+  //SIGNUP
+  firstName: localStorage.getItem("firstName"),
+  lastName: localStorage.getItem("firstName"),
+  email: "",
+  password: "",
+  // TRIPS
+  guideTrips: JSON.parse(localStorage.getItem("trip")),
+  addTrips: [],
+  // DATA
+  tripsData: [],
+  userData: [],
+
+  token: localStorage.getItem("token"),
+  guides: [],
+  tourists: [],
+  addUser: [],
+
+  // --- ///
+  changed: false,
+  isFetching: false,
+  fetchingMessage: "",
+  errorMessage: "",
+  addingGuide: false,
+  addingTourist: false,
+  users: [],
+  addUsers: [],
+  isLoadingLOGIN: false,
+  successLOGIN: false,
+  error: false
 };
