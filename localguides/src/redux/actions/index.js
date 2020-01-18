@@ -1,4 +1,4 @@
-import axiosWithAuth from "../utils/axiosWithAuth";
+import axiosWithAuth from "../../utils/axiosWithAuth";
 
 // GUIDES
 export const SIGNUP_GUIDE_START = "SIGNUP_GUIDE_START";
@@ -22,7 +22,7 @@ export const LOG_OUT = "LOG_OUT";
 export const FETCHING_USER_ERROR = "FETCHING_USER_ERROR";
 export const FETCHING_USER_SUCCESS = "FETCHING_USER_SUCCESS";
 
-const baseURL = "https://bd-trip-split.herokuapp.com/api";
+const baseURL = "https://local-guides-app.herokuapp.com/api";
 
 // REGISTER/SIGNUP ACTION
 export const addGuides = guide => dispatch => {

@@ -51,11 +51,11 @@ const initialState = {
   // TRIPS
   guideTrips: JSON.parse(localStorage.getItem("trip")),
   addTrips: [],
+
+  token: localStorage.getItem("token"),
   // DATA
   tripsData: [],
   userData: [],
-
-  token: localStorage.getItem("token"),
   guides: [],
   tourists: [],
   addUser: [],

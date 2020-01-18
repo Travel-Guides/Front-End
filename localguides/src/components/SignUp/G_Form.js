@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 // REDUX
 import { connect } from "react-redux";
+import { addGuides } from "../../redux/actions";
 // Antd
 import { Form, Input, Button } from "antd";
 
@@ -12,10 +13,12 @@ const G_Form = props => {
   const handleSubmit = e => {
     e.preventDefault();
     props.form.validateFieldsAndScroll((err, values) => {
+      console.log(`THIS IS VALUES`, values);
       if (!err) {
-        props.addUser(values);
-        props.form.setFieldsValue({ username: "", password: "" });
-        // props.history.push(`/login/${values.username}`);
+        props.addGuides(values);
+        console.log(`THIS IS addGuides`, props.addGuides);
+        props.form.setFieldsValue({ email: "", password: "" });
+        props.history.push(`/login/${values.firstName}-${values.lastName}`);
       }
     });
   };
@@ -153,4 +156,5 @@ const G_Form = props => {
 };
 
 const WrappedRegistrationForm = Form.create({ name: "register" })(G_Form);
-export default connect(null, {})(WrappedRegistrationForm);
+
+export default connect(null, { addGuides: addGuides })(WrappedRegistrationForm);
