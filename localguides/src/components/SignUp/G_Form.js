@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // REDUX
 import { connect } from "react-redux";
-import { addGuides } from "../../redux/actions";
+import { addGuides, addTourists } from "../../redux/actions";
 // Antd
 import { Form, Input, Button } from "antd";
 
@@ -10,35 +10,37 @@ import "./G_Form.scss";
 const G_Form = props => {
   console.log(`SIGNUP PROPS`, props);
 
-  const handleSubmit = e => {
+  const [isTourist, setIsTourist] = useState(true);
+  // Login on form submit
+  const guideHandleSubmit = e => {
     e.preventDefault();
     props.form.validateFieldsAndScroll((err, values) => {
       console.log(`THIS IS VALUES`, values);
+
       if (!err) {
         props.addGuides(values);
-        console.log(`THIS IS addGuides`, props.addGuides);
+        console.log(`THIS IS register`, props.addGuides);
         props.form.setFieldsValue({ email: "", password: "" });
         props.history.push(`/login/${values.firstName}-${values.lastName}`);
       }
     });
   };
 
-  const [isTourist, setIsTourist] = useState(true);
+  const touristHandleSubmit = e => {
+    e.preventDefault();
+    props.form.validateFieldsAndScroll((err, values) => {
+      console.log(`THIS IS VALUES`, values);
+
+      if (!err) {
+        props.addTourists(values);
+        console.log(`THIS IS register`, props.addTourists);
+        props.form.setFieldsValue({ email: "", password: "" });
+        props.history.push(`/login/${values.firstName}-${values.lastName}`);
+      }
+    });
+  };
 
   const [confirmation, setConfirmation] = useState(false);
-
-  // const register = e => {
-  //   e.preventDefault();
-
-  //   let creds = {
-  //     email: credentials.email,
-  //     username: credentials.username,
-  //     password: credentials.password
-  //   };
-
-  //   props.register(creds, isTourist);
-  //   setConfirmation(true);
-  // };
 
   const toggleConfirm = () => {
     setConfirmation(!confirmation);
@@ -73,9 +75,13 @@ const G_Form = props => {
       }
     }
   };
+
   return (
     <div className="sign-up-container">
-      <Form {...formItemLayout} onSubmit={handleSubmit}>
+      <Form
+        {...formItemLayout}
+        onSubmit={!isTourist ? guideHandleSubmit : touristHandleSubmit}
+      >
         <h2 className="sign-up">Are you a...</h2>
 
         <div className="radio-buttons">
@@ -155,6 +161,16 @@ const G_Form = props => {
   );
 };
 
+const mapStateToProps = state => {
+  console.log(`THIS IS STATE ON REGISTER`, state);
+  return {
+    token: state.token
+  };
+};
+
 const WrappedRegistrationForm = Form.create({ name: "register" })(G_Form);
 
-export default connect(null, { addGuides: addGuides })(WrappedRegistrationForm);
+export default connect(mapStateToProps, {
+  addGuides: addGuides,
+  addTourists: addTourists
+})(WrappedRegistrationForm);

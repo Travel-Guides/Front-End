@@ -1,8 +1,8 @@
 // ACTION TYPES
 import {
-  SIGNUP_GUIDE_START,
-  SIGNUP_GUIDE_SUCCESS,
-  SIGNUP_GUIDE_FAILURE,
+  REGISTER_START,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE,
   SIGNUP_TOURIST_START,
   SIGNUP_TOURIST_SUCCESS,
   SIGNUP_TOURIST_FAILURE,
@@ -17,21 +17,48 @@ import {
 
 export const guideReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SIGNUP_GUIDE_START:
+    case REGISTER_START:
       return {
         ...state,
         error: "",
         isFetching: true,
         fetchingMessage: action.payload
       };
-    case SIGNUP_GUIDE_SUCCESS:
+    case REGISTER_SUCCESS:
       return {
         ...state,
         isFetching: false,
         fetchingMessage: "",
         error: false
       };
-    case SIGNUP_GUIDE_FAILURE:
+    case REGISTER_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isFetching: false
+      };
+    default:
+      return state;
+  }
+};
+
+export const touristReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SIGNUP_TOURIST_START:
+      return {
+        ...state,
+        error: "",
+        isFetching: true,
+        fetchingMessage: action.payload
+      };
+    case SIGNUP_TOURIST_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        fetchingMessage: "",
+        error: false
+      };
+    case SIGNUP_TOURIST_FAILURE:
       return {
         ...state,
         error: action.payload,
