@@ -1,17 +1,18 @@
 import axiosWithAuth from "../../utils/axiosWithAuth";
 
-// GUIDES
-export const REGISTER_START = "REGISTER_START";
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
-export const REGISTER_FAILURE = "REGISTER_FAILURE";
-
-export const SIGNUP_TOURIST_START = "SIGNUP_TOURIST_START";
-export const SIGNUP_TOURIST_SUCCESS = "SIGNUP_TOURIST_SUCCESS";
-export const SIGNUP_TOURIST_FAILURE = "SIGNUP_TOURIST_FAILURE";
+// GUIDE
+export const SIGNUP_GUIDE_START = "SIGNUP_GUIDE_START";
+export const SIGNUP_GUIDE_SUCCESS = "SIGNUP_GUIDE_SUCCESS";
+export const SIGNUP_GUIDE_FAILURE = "SIGNUP_GUIDE_FAILURE";
 
 export const LOGIN_GUIDE_START = "LOGIN_GUIDE_START";
 export const LOGIN_GUIDE_SUCCESS = "LOGIN_GUIDE_SUCCESS";
 export const LOGIN_GUIDE_FAILURE = "LOGIN_GUIDE_FAILURE";
+
+// TOURIST
+export const SIGNUP_TOURIST_START = "SIGNUP_TOURIST_START";
+export const SIGNUP_TOURIST_SUCCESS = "SIGNUP_TOURIST_SUCCESS";
+export const SIGNUP_TOURIST_FAILURE = "SIGNUP_TOURIST_FAILURE";
 
 export const LOGIN_TOURIST_START = "LOGIN_TOURIST_START";
 export const LOGIN_TOURIST_SUCCESS = "LOGIN_TOURIST_SUCCESS";
@@ -29,7 +30,7 @@ const baseURL = "https://local-guides-app.herokuapp.com/api";
 export const addGuides = guide => dispatch => {
   let URL = baseURL + "/auth/guides/register";
 
-  dispatch({ type: REGISTER_START, payload: "Signing up..." });
+  dispatch({ type: SIGNUP_GUIDE_START, payload: "Signing up..." });
   axiosWithAuth()
     .post(URL, guide, {
       firstName: guide.firstName,
@@ -38,12 +39,12 @@ export const addGuides = guide => dispatch => {
       password: guide.password
     })
     .then(res => {
-      dispatch({ type: REGISTER_SUCCESS, payload: res.data });
+      dispatch({ type: SIGNUP_GUIDE_SUCCESS, payload: res.data });
       return true;
     })
     .catch(err =>
       dispatch({
-        type: REGISTER_FAILURE,
+        type: SIGNUP_GUIDE_FAILURE,
         payload: err.response.data.code
       })
     );
@@ -75,6 +76,7 @@ export const addTourists = tourist => dispatch => {
 // LOGIN ACTION
 export const logInGuide = guide => dispatch => {
   let URL = baseURL + "/auth/guides/login";
+
   dispatch({ type: LOGIN_GUIDE_START, payload: "Logging In..." });
   axiosWithAuth()
     .post(URL, guide)
