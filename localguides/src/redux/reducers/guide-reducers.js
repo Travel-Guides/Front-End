@@ -1,8 +1,8 @@
 // ACTION TYPES
 import {
-  REGISTER_START,
-  REGISTER_SUCCESS,
-  REGISTER_FAILURE,
+  SIGNUP_GUIDE_START,
+  SIGNUP_GUIDE_SUCCESS,
+  SIGNUP_GUIDE_FAILURE,
   SIGNUP_TOURIST_START,
   SIGNUP_TOURIST_SUCCESS,
   SIGNUP_TOURIST_FAILURE,
@@ -15,23 +15,24 @@ import {
   LOG_OUT
 } from "../actions/index";
 
+// REGISTER
 export const guideReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REGISTER_START:
+    case SIGNUP_GUIDE_START:
       return {
         ...state,
         error: "",
         isFetching: true,
         fetchingMessage: action.payload
       };
-    case REGISTER_SUCCESS:
+    case SIGNUP_GUIDE_SUCCESS:
       return {
         ...state,
         isFetching: false,
         fetchingMessage: "",
         error: false
       };
-    case REGISTER_FAILURE:
+    case SIGNUP_GUIDE_FAILURE:
       return {
         ...state,
         error: action.payload,
@@ -68,6 +69,8 @@ export const touristReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+// LOGIN
 
 const initialState = {
   //SIGNUP
