@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Form, Icon, Input, Button } from "antd";
+import { Form, Icon, Input, Button, Tooltip } from "antd";
+import { logInGuide, logInTourist } from "../../redux/actions";
 
 import "./Login.scss";
 
-function hasErrors(fieldsError) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
+// function hasErrors(fieldsError) {
+//   return Object.keys(fieldsError).some(field => fieldsError[field]);
+// }
 
-const Login = props => {
-  console.log(`THIS IS LOGIN PROPS`, props);
+const Login = ({ logInGuide, logInTourist, token, toggleLogin, history }) => {
+  console.log(`THIS IS LOGIN PROPS`, logInGuide);
+
   const [user, setUser] = useState({ email: "", password: "" });
+  const [isTourist, setIsTourist] = useState(true);
 
-  // useEffect(() => {
-  //   if (token) {
-  //     history.push("/trips");
-  //   }
-  // }, [history, token]);
+  useEffect(() => {
+    if (token) {
+      history.push("/dashboard");
+    }
+  }, [history, token]);
 
   const handleChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
+    console.log(`THIS IS USER`, user);
   };
 
   // const handleSubmit = e => {
@@ -32,85 +36,118 @@ const Login = props => {
   //   });
   // };
 
-  // Login on form submit
-  const login = e => {
+  const guideHandleSubmit = e => {
     e.preventDefault();
-
-    props.form.validateFields(user).then(() => {
-      props.toggleLogin(null);
-      props.setIsLoggedIn(true);
-    });
+    if (user.email && user.password) {
+      logInGuide(user);
+      setUser({ email: "", password: "" });
+    }
   };
 
-  const {
-    getFieldDecorator,
-    getFieldsError,
-    getFieldError,
-    isFieldTouched
-  } = props.form;
+  const touristHandleSubmit = e => {
+    e.preventDefault();
+    if (user.email && user.password) {
+      logInTourist(user);
+      setUser({ email: "", password: "" });
+    }
+  };
 
-  const usernameError = isFieldTouched("username") && getFieldError("username");
-  const passwordError = isFieldTouched("password") && getFieldError("password");
+  const handleRadio = e => {
+    setIsTourist(!isTourist);
+  };
+
+  // Login on form submit
 
   return (
-    <div class="login-container">
-      <Form className="login-form" layout="inline" onSubmit={login}>
-        <div className="close-button" onClick={props.toggleLogin}>
+    <div className="login-container">
+      <div className="login-form" layout="inline">
+        <div className="close-button" onClick={toggleLogin}>
           <Icon className="close-icon" type="close" />
         </div>
-        <div className="login-form-container">
-          <h2>Log In</h2>
 
-          <Form.Item
-            validateStatus={usernameError ? "error" : ""}
-            help={usernameError || ""}
-          >
-            {getFieldDecorator("email", {
-              rules: [{ required: true, message: "Please input your email!" }]
-            })(
+        <div className="radio-buttons radio-login">
+          <label>
+            <div>
+              {isTourist ? (
+                <div className="checked-radio" onClick={handleRadio}></div>
+              ) : (
+                <div className="radio" onClick={handleRadio}></div>
+              )}
+              Tourist
+            </div>
+          </label>
+          <label>
+            <div>
+              {!isTourist ? (
+                <div className="checked-radio" onClick={handleRadio}></div>
+              ) : (
+                <div className="radio" onClick={handleRadio}></div>
+              )}
+              Guide
+            </div>
+          </label>
+        </div>
+
+        <div className="login-form-container">
+          <h2 style={{ marginTop: 10 }}>Login</h2>
+          <Form onChange={handleChange}>
+            <div>
               <Input
+                type="text"
+                name="email"
+                placeholder="Email"
+                value={user.email}
+                style={{ marginBottom: 10, width: "100%", height: 40 }}
                 prefix={
                   <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
-                placeholder="email"
+                suffix={
+                  <Tooltip title="Extra information">
+                    <Icon
+                      type="info-circle"
+                      style={{ color: "rgba(0,0,0,.45)" }}
+                    />
+                  </Tooltip>
+                }
               />
-            )}
-          </Form.Item>
-          <Form.Item
-            validateStatus={passwordError ? "error" : ""}
-            help={passwordError || ""}
-          >
-            {getFieldDecorator("password", {
-              rules: [
-                { required: true, message: "Please input your Password!" }
-              ]
-            })(
+            </div>
+            <div>
               <Input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={user.password}
+                style={{ marginBottom: 10, height: 40 }}
                 prefix={
                   <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
-                type="password"
-                placeholder="Password"
+                suffix={
+                  <Tooltip title="Extra information">
+                    <Icon
+                      type="info-circle"
+                      style={{ color: "rgba(0,0,0,.45)" }}
+                    />
+                  </Tooltip>
+                }
               />
-            )}
-          </Form.Item>
-          <Form.Item>
+            </div>
             <Button
               type="primary"
-              htmlType="submit"
-              disabled={hasErrors(getFieldsError())}
+              block
+              onClick={!isTourist ? guideHandleSubmit : touristHandleSubmit}
+              style={{ marginBottom: 15 }}
             >
-              Log In
+              Submit
             </Button>
-          </Form.Item>
+          </Form>
         </div>
-      </Form>
+      </div>
     </div>
   );
 };
 
 const mapStateToProps = state => {
-  console.log(`THIS IS STATE ON LOGIN`, state);
+  console.log(`THIS IS STATE ON LOGIN`, state.token);
   return {
     token: state.token
   };
@@ -120,4 +157,7 @@ const WrappedHorizontalLoginForm = Form.create({ name: "horizontal_login" })(
   Login
 );
 
-export default connect(mapStateToProps, {})(WrappedHorizontalLoginForm);
+export default connect(mapStateToProps, {
+  logInGuide: logInGuide,
+  logInTourist: logInTourist
+})(WrappedHorizontalLoginForm);

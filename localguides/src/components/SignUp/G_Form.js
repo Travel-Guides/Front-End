@@ -11,6 +11,8 @@ const G_Form = props => {
   console.log(`SIGNUP PROPS`, props);
 
   const [isTourist, setIsTourist] = useState(true);
+  const [confirmation, setConfirmation] = useState(false);
+
   // Login on form submit
   const guideHandleSubmit = e => {
     e.preventDefault();
@@ -39,8 +41,6 @@ const G_Form = props => {
       }
     });
   };
-
-  const [confirmation, setConfirmation] = useState(false);
 
   const toggleConfirm = () => {
     setConfirmation(!confirmation);

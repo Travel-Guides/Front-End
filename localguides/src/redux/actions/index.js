@@ -84,7 +84,7 @@ export const logInGuide = guide => dispatch => {
       dispatch({
         type: LOGIN_GUIDE_SUCCESS,
         payload: res.data.token,
-        guide: res.data.guide
+        guide: guide.email
       })
     )
     .catch(err =>
@@ -96,7 +96,7 @@ export const logInGuide = guide => dispatch => {
 };
 
 export const logInTourist = tourist => dispatch => {
-  let URL = baseURL + "/auth/guides/login";
+  let URL = baseURL + "/auth/tourists/login";
   dispatch({ type: LOGIN_TOURIST_START, payload: "Logging In..." });
   axiosWithAuth()
     .post(URL, tourist)
@@ -104,7 +104,7 @@ export const logInTourist = tourist => dispatch => {
       dispatch({
         type: LOGIN_TOURIST_SUCCESS,
         payload: res.data.token,
-        tourist: res.data.tourist
+        tourist: tourist.email
       })
     )
     .catch(err =>
