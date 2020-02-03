@@ -45,9 +45,10 @@ function App() {
         />
       ) : null}
       <Route exact path="/" component={HomePage} />
+      <PrivateRoute exact path="/home" component={HomePage} />
+      <PrivateRoute path="/dashboard" component={Dashboard} />
       <Route exact path="/register" component={G_Form} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/dashboard" component={Dashboard} />
+      <Route path="/login" component={Login} />
     </div>
   );
 }

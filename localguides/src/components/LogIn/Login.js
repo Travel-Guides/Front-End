@@ -1,40 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Form, Icon, Input, Button, Tooltip } from "antd";
 import { logInGuide, logInTourist } from "../../redux/actions";
 
+import { Form, Icon, Input, Button, Tooltip } from "antd";
 import "./Login.scss";
 
-// function hasErrors(fieldsError) {
-//   return Object.keys(fieldsError).some(field => fieldsError[field]);
-// }
-
-const Login = ({ logInGuide, logInTourist, token, toggleLogin, history }) => {
-  console.log(`THIS IS LOGIN PROPS`, logInGuide);
+const Login = ({ logInGuide, logInTourist, toggleLogin, token, history }) => {
+  console.log(`THIS IS LOGIN Token`, token);
 
   const [user, setUser] = useState({ email: "", password: "" });
   const [isTourist, setIsTourist] = useState(true);
 
   useEffect(() => {
     if (token) {
-      history.push("/dashboard");
+      history.push("/home");
     }
   }, [history, token]);
 
   const handleChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
-    console.log(`THIS IS USER`, user);
   };
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   props.form.validateFields((err, values) => {
-  //     if (user.email && user.password) {
-  //       console.log("Received values of form: ", values);
-  //       setUser({ email: "", password: "" });
-  //     }
-  //   });
-  // };
 
   const guideHandleSubmit = e => {
     e.preventDefault();
@@ -55,8 +40,6 @@ const Login = ({ logInGuide, logInTourist, token, toggleLogin, history }) => {
   const handleRadio = e => {
     setIsTourist(!isTourist);
   };
-
-  // Login on form submit
 
   return (
     <div className="login-container">
@@ -146,16 +129,16 @@ const Login = ({ logInGuide, logInTourist, token, toggleLogin, history }) => {
   );
 };
 
+const WrappedHorizontalLoginForm = Form.create({ name: "horizontal_login" })(
+  Login
+);
+
 const mapStateToProps = state => {
-  console.log(`THIS IS STATE ON LOGIN`, state.token);
+  console.log(`THIS IS STATE ON LOGIN`, state);
   return {
     token: state.token
   };
 };
-
-const WrappedHorizontalLoginForm = Form.create({ name: "horizontal_login" })(
-  Login
-);
 
 export default connect(mapStateToProps, {
   logInGuide: logInGuide,
