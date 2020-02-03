@@ -124,33 +124,17 @@ export const touristReducer = (state = initialState, action) => {
   }
 };
 
-// LOGIN
-// export const guidesLogin = (state = initialState, action) => {
-//   switch (action.type) {
-//     default:
-//       return state;
-//   }
-// };
-
-// export const touristLogin = (state = initialState, action) => {
-//   switch (action.type) {
-
-//     default:
-//       return state;
-//   }
-// };
-
 const initialState = {
   //SIGNUP
   firstName: localStorage.getItem("firstName"),
   lastName: localStorage.getItem("lastName"),
   email: localStorage.getItem("email"),
   password: "",
+  token: localStorage.getItem("token"),
   // TRIPS
   guideTrips: JSON.parse(localStorage.getItem("trip")),
   addTrips: [],
 
-  token: localStorage.getItem("token"),
   // DATA
   tripsData: [],
   userData: [],
